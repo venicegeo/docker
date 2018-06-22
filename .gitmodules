@@ -1,0 +1,6 @@
+[submodule "projects/portland-metro/geotrans-mgrs-converter"]
+	path = projects/portland-metro/geotrans-mgrs-converter
+	url = https://github.com/venicegeo/geotrans-mgrs-converter.git
+[submodule "projects/portland-metro/pelias-api"]
+	path = projects/portland-metro/pelias-api
+	url = https://github.com/venicegeo/pelias-api.git
