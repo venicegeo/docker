@@ -1,5 +1,7 @@
 
-![VeniceGeo](https://avatars2.githubusercontent.com/u/15457149?s=200&v=4) # Pelias in Docker
+![VeniceGeo](https://avatars2.githubusercontent.com/u/15457149?s=100&v=4) 
+
+# Pelias in Docker
 
 This repository contains a framework for downloading/preparing and building the the [Pelias Geocoder](https://github.com/pelias/pelias) using Docker and [Docker Compose](https://github.com/docker/compose#docker-compose).
 
