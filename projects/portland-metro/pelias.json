@@ -39,6 +39,10 @@
       "datapath": "/data/geonames",
       "countryCode": "ALL"
     },
+    "gndb": {
+      "datapath": "/data/gndb",
+      "countryCode": "AF"
+    },
     "openstreetmap": {
       "download": [
         { "sourceURL": "https://s3.amazonaws.com/metro-extracts.nextzen.org/portland_oregon.osm.pbf" }

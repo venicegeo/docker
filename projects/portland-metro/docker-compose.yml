@@ -118,3 +118,10 @@ services:
         soft: 65536
         hard: 65536
     cap_add: [ "IPC_LOCK" ]
+  gndb:
+    depends_on: [ "libpostal_baseimage", "whosonfirst" ]
+    build: pelias-gndb
+    container_name: venicegeo_gndb
+    volumes:
+      - "./pelias.json:/code/pelias.json"
+      - "${DATA_DIR}:/data"

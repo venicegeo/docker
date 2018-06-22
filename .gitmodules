@@ -4,3 +4,6 @@
 [submodule "projects/portland-metro/pelias-api"]
 	path = projects/portland-metro/pelias-api
 	url = https://github.com/venicegeo/pelias-api.git
+[submodule "projects/portland-metro/pelias-gndb"]
+	path = projects/portland-metro/pelias-gndb
+	url = https://github.com/venicegeo/pelias-gndb.git
