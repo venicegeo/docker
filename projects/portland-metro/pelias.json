@@ -76,7 +76,8 @@
       "importPlace": [
         "85688513",
         "85688623"
-      ]
+      ],
+      "polygons": true
     },
     "transit": {
       "datapath": "/data/transit",
