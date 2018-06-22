@@ -23,7 +23,7 @@ services:
       - "./synonyms/custom_street.txt:/code/pelias/schema/synonyms/custom_street.txt"
   geotrans:
     build: geotrans-mgrs-converter
-    ports: [ "3000":"3000" ]
+    ports: [ "3000:3000" ]
     volumes:
       - "./pelias.json:/code/pelias.json"
       - "${DATA_DIR}:/data"
