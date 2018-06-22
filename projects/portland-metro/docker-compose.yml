@@ -21,11 +21,17 @@ services:
       - "./pelias.json:/code/pelias.json"
       - "./synonyms/custom_name.txt:/code/pelias/schema/synonyms/custom_name.txt"
       - "./synonyms/custom_street.txt:/code/pelias/schema/synonyms/custom_street.txt"
+  geotrans:
+    build: geotrans-mgrs-converter
+    ports: [ "3000:3000" ]
+    volumes:
+      - "./pelias.json:/code/pelias.json"
+      - "${DATA_DIR}:/data"
   api:
-    image: pelias/api:master
+    build: pelias-api
     container_name: pelias_api
     restart: always
-    environment: [ "PORT=4000" ]
+    env_file: api.env
     ports: [ "4000:4000" ]
     volumes:
       - "./pelias.json:/code/pelias.json"
@@ -40,7 +46,7 @@ services:
       - "./pelias.json:/code/pelias.json"
       - "${DATA_DIR}:/data"
   whosonfirst:
-    image: pelias/whosonfirst:master
+    build: pelias-whosonfirst
     container_name: pelias_whosonfirst
     volumes:
       - "./pelias.json:/code/pelias.json"
@@ -112,3 +118,10 @@ services:
         soft: 65536
         hard: 65536
     cap_add: [ "IPC_LOCK" ]
+  gndb:
+    depends_on: [ "libpostal_baseimage", "whosonfirst" ]
+    build: pelias-gndb
+    container_name: venicegeo_gndb
+    volumes:
+      - "./pelias.json:/code/pelias.json"
+      - "${DATA_DIR}:/data"

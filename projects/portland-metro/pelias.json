@@ -28,7 +28,8 @@
     "defaultParameters": {
       "focus.point.lat": 45.52,
       "focus.point.lon": -122.67
-    }
+    },
+    "auth":null
   },
   "imports": {
     "adminLookup": {
@@ -37,6 +38,10 @@
     "geonames": {
       "datapath": "/data/geonames",
       "countryCode": "ALL"
+    },
+    "gndb": {
+      "datapath": "/data/gndb",
+      "countryCode": "AF"
     },
     "openstreetmap": {
       "download": [
@@ -71,7 +76,8 @@
       "importPlace": [
         "85688513",
         "85688623"
-      ]
+      ],
+      "polygons": true
     },
     "transit": {
       "datapath": "/data/transit",

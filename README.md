@@ -1,4 +1,6 @@
 
+![VeniceGeo](https://avatars2.githubusercontent.com/u/15457149?s=100&v=4) 
+
 # Pelias in Docker
 
 This repository contains a framework for downloading/preparing and building the the [Pelias Geocoder](https://github.com/pelias/pelias) using Docker and [Docker Compose](https://github.com/docker/compose#docker-compose).
@@ -112,6 +114,7 @@ Usage: pelias [command] [action] [options]
   compose   kill                     kill one or more docker-compose service(s)
   compose   down                     stop all docker-compose service(s)
   download  wof                      (re)download whosonfirst data
+  download  gndb                     (re)download gndb data
   download  oa                       (re)download openaddresses data
   download  osm                      (re)download openstreetmap data
   download  tiger                    (re)download TIGER data
@@ -124,6 +127,7 @@ Usage: pelias [command] [action] [options]
   elastic   status                   HTTP status code of the elasticsearch service
   elastic   wait                     wait for elasticsearch to start up
   import    wof                      (re)import whosonfirst data
+  import    gndb                     (re)import gndb data
   import    oa                       (re)import openaddresses data
   import    osm                      (re)import openstreetmap data
   import    polylines                (re)import polylines data
@@ -168,6 +172,7 @@ pelias download oa                       (re)download openaddresses data
 pelias download osm                      (re)download openstreetmap data
 pelias download tiger                    (re)download TIGER data
 pelias download transit                  (re)download transit data
+pelias download gndb                     (re)download gndb data
 pelias download all                      (re)download all data
 ```
 
@@ -211,6 +216,7 @@ pelias import oa                       (re)import openaddresses data
 pelias import osm                      (re)import openstreetmap data
 pelias import polylines                (re)import polylines data
 pelias import transit                  (re)import transit data
+pelias import gndb                     (re)import gndb data
 pelias import all                      (re)import all data
 ```
 
@@ -288,6 +294,7 @@ You can now make queries against your new Pelias build:
 - http://localhost:4000/v1/search?text=portland
 - [http://localhost:4000/v1/search?text=1901 Main St](http://localhost:4000/v1/search?text=1901%20Main%20St)
 - http://localhost:4000/v1/reverse?point.lon=-122.650095&point.lat=45.533467
+- [http://localhost:4000/v1/convert?from=mgrs&to=decdeg&q=38S MB 43166 86546](http://localhost:4000/v1/convert?from=mgrs&to=decdeg&q=38S%20MB%2043166%2086546)
 
 ### Placeholder
 
