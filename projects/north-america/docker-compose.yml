@@ -14,7 +14,8 @@ services:
     volumes:
       - "./pelias.json:/code/pelias.json"
   api:
-    image: pelias/api:master
+    #image: pelias/api:master
+    build: ../../images/api
     container_name: pelias_api
     restart: always
     environment: [ "PORT=4000" ]
@@ -31,7 +32,8 @@ services:
       - "./pelias.json:/code/pelias.json"
       - "${DATA_DIR}:/data"
   whosonfirst:
-    image: pelias/whosonfirst:master
+    #image: pelias/whosonfirst:master
+    build: ../../images/whosonfirst
     container_name: pelias_whosonfirst
     volumes:
       - "./pelias.json:/code/pelias.json"
