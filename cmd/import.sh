@@ -2,7 +2,7 @@
 set -e;
 
 # per-source imports
-function import_wof(){ compose_run 'whosonfirst' './bin/start'; }
+function import_wof(){ compose_run 'whosonfirst' npm start }
 function import_oa(){ compose_run 'openaddresses' "./bin/parallel ${OPENADDRESSES_PARALLELISM:-1}"; }
 function import_osm(){ compose_run 'openstreetmap' './bin/start'; }
 function import_polylines(){ compose_run 'polylines' './bin/start'; }

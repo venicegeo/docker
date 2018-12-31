@@ -2,7 +2,7 @@
 set -e;
 
 # per-source downloads
-function download_wof(){ compose_run 'whosonfirst' './bin/download'; }
+function download_wof(){ compose_run 'whosonfirst' npm run download }
 function download_oa(){ compose_run 'openaddresses' './bin/download'; }
 function download_osm(){ compose_run 'openstreetmap' './bin/download'; }
 function download_geonames(){ compose_run 'geonames' './bin/download'; }
