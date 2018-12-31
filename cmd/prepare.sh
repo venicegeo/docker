@@ -4,7 +4,7 @@ set -e;
 # per-source prepares
 function prepare_polylines(){ compose_run 'polylines' bash ./docker_extract.sh; }
 # alternative creation method for polyline data using valhalla
-function prepare_valhalla(){ compose_run 'valhalla' bash ./docker_build.sh; }
+function prepare_valhalla(){ compose_run 'valhalla' bash ./docker_extract.sh; }
 function prepare_interpolation(){ compose_run 'interpolation' bash ./docker_build.sh; }
 function prepare_placeholder(){
   compose_run 'placeholder' ./cmd/extract.sh;
