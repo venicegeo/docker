@@ -302,6 +302,26 @@ You can inspect the container logs for errors by running:
 pelias compose logs
 ```
 
+## Venicegeo specific notes
+
+### Geographic Names Database
+
+##### configuration
+
+You can restrict the downloader to a single country by adding a `countryCode` property in your `pelias.json`:
+
+```javascript
+"imports": {
+  "gndb": {
+    ...
+    "countryCode": "SG"
+  }
+}
+```
+*note: GNDB uses FIPS for country codes as opposed to ISO-3166 alpha2 in Geonames.
+Not all country codes will be the same between these two.
+For example: AU corresponds to Austria in GNDB and Australia in Geonames.*
+
 ## Make an example query
 
 You can now make queries against your new Pelias build:
