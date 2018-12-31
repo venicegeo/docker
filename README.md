@@ -1,7 +1,7 @@
 
 # Pelias in Docker
 
-This repository contains a framework for downloading/preparing and building the the [Pelias Geocoder](https://github.com/pelias/pelias) using Docker and [Docker Compose](https://github.com/docker/compose#docker-compose).
+This repository contains a framework for downloading/preparing and building the [Pelias Geocoder](https://github.com/pelias/pelias) using Docker and [Docker Compose](https://github.com/docker/compose#docker-compose).
 
 ## Projects
 
@@ -11,13 +11,15 @@ We recommend you start with the `portland-metro` example as a first-time user; o
 
 ## Not suitable for large geographies
 
-We do not recommend running large extracts (anything larger than a US State) inside Docker, the scripts are **not suitable** for full planet builds. If you require global coverage, please see our [install documentation](https://pelias.io/install.html) or consider using the [geocode.earth](https://geocode.earth/) services hosted by members of our core team.
+We do not recommend running large extracts (anything larger than a US State) inside Docker, the scripts are **not suitable** for full planet builds. If you require global coverage, please see our [install documentation](https://github.com/pelias/documentation/blob/master/getting_started_install.md) or consider using the [geocode.earth](https://geocode.earth/) services hosted by members of our core team.
 
 ## Prerequisites
 
 You will need to have `docker` and `docker-compose` installed before continuing. If you are not using the latest version, please mention that in any bugs reports.
 
-If you are running OSX, you should also install `brew install coreutils` and max-out your Docker limits in `Docker > Preferences > Advanced`.
+For Mac OSX platform :
+- You should additionally install `brew install coreutils`.
+- Max-out the computing resources( `Memory-RAM and CPUs-Cores` ) dedicated to Docker in `Docker > Preferences > Advanced`. 
 
 Scripts can easily download tens of GB of geographic data, so ensure you have enough free disk space!
 
@@ -81,6 +83,7 @@ Then use your text editor to modify the `.env` file to reflect your new path, it
 ```bash
 COMPOSE_PROJECT_NAME=pelias
 DATA_DIR=/tmp/pelias
+DOCKER_USER=1000
 ```
 
 You can then list the environment variables to ensure they have been correctly set:
@@ -94,6 +97,12 @@ pelias system env
 The compose variables are optional and are documented here: https://docs.docker.com/compose/env-file/
 
 Note: changing the `COMPOSE_PROJECT_NAME` variable is not advisable unless you know what you are doing. If you are migrating from the deprecated `pelias/dockerfiles` repository then you can set `COMPOSE_PROJECT_NAME=dockerfiles` to enable backwards compatibility with containers created using that repository.
+
+### Variable: DOCKER_USER
+
+All processes in Pelias containers are run as non-root users. By default, the UID of the processes will be `1000`, which is the first user ID on _most_ Linux systems and is likely to be a good option. However, if restricting file permissions in your data directory to a different user or group is important, this can be overridden by setting the `DOCKER_USER` variable.
+
+This variable can take just a UID or a UID:GID combination such as `1000:1000`. See the [docker-compose](https://docs.docker.com/compose/compose-file/#domainname-hostname-ipc-mac_address-privileged-read_only-shm_size-stdin_open-tty-user-working_dir) and [docker run](https://docs.docker.com/engine/reference/run/#user) documentation on controlling Docker container users for more information.
 
 ## CLI commands
 
@@ -226,6 +235,14 @@ pelias system env                      display environment variables
 pelias system update                   update the pelias command by pulling the latest version
 ```
 
+### Test command
+
+The test command runs the [fuzzy-tester](https://github.com/pelias/fuzzy-tester) tests against any test cases in your project.
+
+```bash
+test      run                      run fuzzy-tester test cases
+```
+
 ## Generic build workflow
 
 The following shell script can be used to automate a build:
@@ -236,6 +253,9 @@ set -x
 
 # create directories
 mkdir /code /data
+
+# set proper permissions. make sure the user matches your `DOCKER_USER` setting in `.env`
+chown 1000:1000 /code /data
 
 # clone repo
 cd /code
@@ -261,6 +281,9 @@ pelias download all
 pelias prepare all
 pelias import all
 pelias compose up
+
+# optionally run tests
+pelias test run
 ```
 
 ## View status of running containers
@@ -278,6 +301,26 @@ You can inspect the container logs for errors by running:
 ```bash
 pelias compose logs
 ```
+
+## Venicegeo specific notes
+
+### Geographic Names Database
+
+##### configuration
+
+You can restrict the downloader to a single country by adding a `countryCode` property in your `pelias.json`:
+
+```javascript
+"imports": {
+  "gndb": {
+    ...
+    "countryCode": "SG"
+  }
+}
+```
+*note: GNDB uses FIPS for country codes as opposed to ISO-3166 alpha2 in Geonames.
+Not all country codes will be the same between these two.
+For example: AU corresponds to Austria in GNDB and Australia in Geonames.*
 
 ## Make an example query
 
